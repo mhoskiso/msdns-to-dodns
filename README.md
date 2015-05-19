@@ -29,7 +29,7 @@ OPTIONAL - Used to get a list of websites being hosted in IIS
 
 # nslookup-by-iis-sites.ps1
 
-OPTIONAL - Used with get-site-list.ps1 to sites that aren't using your DNS server.
+OPTIONAL - Used with get-site-list.ps1 to find sites that aren't using your DNS server.
 
 # dns-do-a.ps1
 
