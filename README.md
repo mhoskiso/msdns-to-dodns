@@ -66,3 +66,7 @@ WARNING! This will delete all dns zones on your Windows server. If you are impor
 # dns-do-verify-import.ps1
 
 Checks your DNS zone export list(minus cleaned up zones) to verify there is an entry at Digital Ocean after migration.
+
+# hosted-site-using-old-ns.ps1
+
+OPTIONAL - Checks hosted site domains from IIS site list to see if they are still using the old DNS server instead of DigitalOcean.
