@@ -7,6 +7,7 @@ $txtrecords = Get-WMIObject -Namespace 'Root\MicrosoftDNS' MicrosoftDNS_TXTType 
 
 
 
+
 ForEach ($txtrecord in $txtrecords)
 {
 	if ($txtrecord.ContainerName -eq $txtrecord.OwnerName){
@@ -14,7 +15,8 @@ ForEach ($txtrecord in $txtrecords)
 	
  }
  else{
- $txtrecord.OwnerName = $txtrecord.OwnerName.TrimEnd($txtrecord.ContainerName)
+ $txtrecord.OwnerName = $txtrecord.OwnerName -replace "." + $txtrecord.ContainerName
+
  }
 	
 	try	{

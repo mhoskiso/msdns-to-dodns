@@ -7,9 +7,10 @@ $srvrecords = Get-WMIObject -Namespace 'Root\MicrosoftDNS' MicrosoftDNS_SRVType 
 
 ForEach ($srvrecord in $srvrecords)
 {
+	$srvrecord.OwnerName = $srvrecord.OwnerName -replace "." + $srvrecord.ContainerName
 	try{
 		write-host "Domain:"  $srvrecord.ContainerName " Adding SRV record :" $srvrecord.OwnerName  " Pointing to: " $srvrecord.SRVDomainName " with Priority:"$srvrecord.Priority",Port:"$srvrecord.Port", Weight:"$srvrecord.Weight
-		Add-DoPxDnsRecord -DomainName $srvrecord.ContainerName -SRV -ServiceName $srvrecord.OwnerName.TrimEnd($srvrecord.ContainerName) -HostName $srvrecord.SRVDomainName -Priority $srvrecord.Priority -Port $srvrecord.Port -Weight $srvrecord.Weight
+		Add-DoPxDnsRecord -DomainName $srvrecord.ContainerName -SRV -ServiceName $srvrecord.OwnerName -HostName $srvrecord.SRVDomainName -Priority $srvrecord.Priority -Port $srvrecord.Port -Weight $srvrecord.Weight
 	}
 	catch 
 	{
