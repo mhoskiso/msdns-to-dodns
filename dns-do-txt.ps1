@@ -6,9 +6,19 @@ $ErrorLog = "c:\tools\sync-txt-errors.txt"
 $txtrecords = Get-WMIObject -Namespace 'Root\MicrosoftDNS' MicrosoftDNS_TXTType | Select ContainerName, OwnerName, RecordData
 
 
+
 ForEach ($txtrecord in $txtrecords)
 {
+	if ($txtrecord.ContainerName -eq $txtrecord.OwnerName){
+	$txtrecord.OwnerName = "@"
+	
+ }
+ else{
+ $txtrecord.OwnerName = $txtrecord.OwnerName.TrimEnd($txtrecord.ContainerName)
+ }
+	
 	try	{
+		
 		write-host "Domain:"  $txtrecord.ContainerName " Adding TXT record :" $txtrecord.OwnerName  " Data: " $txtrecord.RecordData
 		Add-DoPxDnsRecord -DomainName $txtrecord.ContainerName -TXT -RecordName $txtrecord.OwnerName -Message $txtrecord.RecordData
 	}
